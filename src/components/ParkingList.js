@@ -1,6 +1,6 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import {Button} from 'react-bootstrap';
-
 
 
 const ParkingList = () => {
@@ -8,9 +8,11 @@ const ParkingList = () => {
         <section>
             <section className='parkingList'>
                 <h3>Parking List</h3>
-                <Button className="pull-right" >
-                    Edit Lot
-                </Button>
+                <Link >
+                    <Button className="pull-right" >
+                        Edit Lot
+                    </Button>
+                </Link>
             </section>
 
             <section>
@@ -35,6 +37,14 @@ const ParkingList = () => {
                         </tr>
                     </tbody>
                 </table>
+            </section>
+        
+            <section>
+                <Link >
+                    <Button>
+                        create a new Parking Lot
+                    </Button>
+                </Link>
             </section>
         </section>
     );

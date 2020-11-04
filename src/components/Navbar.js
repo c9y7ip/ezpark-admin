@@ -4,7 +4,8 @@ import React from 'react';
 
 import {Navbar, Nav} from 'react-bootstrap';
 
-const NavBar = () => {
+const NavBar = (props) => {
+    
     return (
         <Navbar bg="dark" variant="dark" >
             <Navbar.Brand href="admin" className="align-center">
@@ -16,15 +17,24 @@ const NavBar = () => {
             />{' '}
             EZ PARK
             </Navbar.Brand>
-
+            
             <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
+            {
+                props.isLogin 
+                ?
                 <Nav>
                     <Navbar.Text>
                         Signed in as: <b style={{color:"white"}}>Bobby</b>
                     </Navbar.Text>
                     <Nav.Link href="/">logout</Nav.Link>
                 </Nav>
-            </Navbar.Collapse>
+                :
+                <Nav>
+                    <Nav.Link href="/">login</Nav.Link>
+                </Nav>   
+            }   
+            </Navbar.Collapse> 
+            
         </Navbar>
     );
 };
