@@ -1,16 +1,32 @@
 import React from 'react';
 
-import './styles/navbar.css'
+// import './styles/navbar.css'
 
-const Navbar = () => {
+import {Navbar, Nav} from 'react-bootstrap';
+
+const NavBar = () => {
     return (
-        <header className='navbar'>
-            <img src='/images/logo-small.png' alt='logo' />
-            <h1>
-                EZ PARK
-            </h1>
-        </header>
+        <Navbar bg="dark" variant="dark" >
+            <Navbar.Brand href="admin" className="align-center">
+            <img
+                alt="logo"
+                src="/images/logo-small.png"
+                width="100"
+                className="d-inline-block"
+            />{' '}
+            EZ PARK
+            </Navbar.Brand>
+
+            <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
+                <Nav>
+                    <Navbar.Text>
+                        Signed in as: <b style={{color:"white"}}>Bobby</b>
+                    </Navbar.Text>
+                    <Nav.Link href="/">logout</Nav.Link>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
     );
 };
 
-export default Navbar;
+export default NavBar;

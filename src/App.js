@@ -1,7 +1,6 @@
 import {React, Component} from 'react';
 import './App.css'
-
-import Navbar from './components/Navbar'
+import 'bootstrap/dist/css/bootstrap.min.css';  
 
 import MainPage from './pages/MainAdmin'
 import LoginPage from './pages/LoginPage'
@@ -19,7 +18,6 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Navbar />
                 <Route exact path='/' component={LoginPage} />
                 <Route exact path='/admin' component={MainPage} />
             </Router>
