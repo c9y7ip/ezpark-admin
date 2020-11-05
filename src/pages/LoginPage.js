@@ -1,4 +1,5 @@
 import React from 'react';
+import EventService from "./EventService";
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -16,15 +17,7 @@ class LoginPage extends React.Component {
 
     handleSubmit(event){
         event.preventDefault();
-        console.log(this.state);
-        fetch('http://localhost:5000/auth/login', {
-            method: 'post',
-            body: JSON.stringify(this.state),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then((resp)=>{ return resp.text() }).then((text)=>{ console.log(text) });
+        EventService.auth.userLogin(this.state);
     }
 
     render(){
