@@ -1,12 +1,11 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 import NavBar from '../components/Navbar'
 import EventService from "./EventService";
 
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {email: '', password: ''};
+        this.state = {email: '', password: '', isAuthenticated: false};
     }
 
     onPasswordChange(e) {
@@ -19,13 +18,20 @@ class LoginPage extends React.Component {
 
     handleSubmit(event){
         event.preventDefault();
-        EventService.auth.userLogin(this.state);
+        EventService.auth.userLogin(this.state, (authSuccess) => {
+            this.setState({isAuthenticated: authSuccess});
+            if(authSuccess){
+                this.props.history.push('/admin', this.state);
+            } else {
+                window.location.reload(false);
+            }
+        })
     }
 
     render() {
         return (
             <section>
-                <NavBar isLogin={false}/>
+                <NavBar isLogin={this.state.isAuthenticated}/>
                 <h2>Login Page</h2>
                 <form onSubmit={this.handleSubmit.bind(this)} method="POST">
                     <section>
@@ -36,11 +42,7 @@ class LoginPage extends React.Component {
                         <label>Password : </label>
                         <input onChange={this.onPasswordChange.bind(this)} type='password' placeholder='*****'/>
                     </section>
-                    <Link to="/admin">
-                        <button>
-                            Login
-                        </button>
-                    </Link>
+                    <button type='submit'>Login</button>
                 </form>
             </section>
         );

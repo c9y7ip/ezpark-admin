@@ -7,9 +7,15 @@ const apiClient = axios.create({
     baseURL: URL
 })
 
-const userLogin = (payload) => {
-    apiClient.post('/auth/login', payload)
-        .then(res => apiClient.defaults.headers.common['Authorization'] = res.data);
+const userLogin = (payload, callback) => {
+    apiClient.post('/auth/login', payload, callback)
+        .then((res) => {
+            apiClient.defaults.headers.common['Authorization'] = res.data
+            callback(true);
+        }).catch(error => {
+            console.log(error);
+            callback(false);
+    });
 }
 
 const userLogout = () => {
