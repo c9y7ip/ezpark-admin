@@ -3,12 +3,17 @@ import React from 'react';
 // import './styles/navbar.css'
 
 import {Navbar, Nav} from 'react-bootstrap';
+import { logout } from '../utils';
+
+function handleLogout() {
+    logout();
+    //TODO: set state to logged out
+};
 
 const NavBar = (props) => {
-    
     return (
         <Navbar bg="dark" variant="dark" >
-            <Navbar.Brand href="admin" className="align-center">
+            <Navbar.Brand href="/" className="align-center">
             <img
                 alt="logo"
                 src="/images/logo-small.png"
@@ -26,7 +31,7 @@ const NavBar = (props) => {
                     <Navbar.Text>
                         Signed in as: <b style={{color:"white"}}>Bobby</b>
                     </Navbar.Text>
-                    <Nav.Link href="/">logout</Nav.Link>
+                    <Nav.Link href="/" onClick={handleLogout}>logout</Nav.Link>
                 </Nav>
                 :
                 <Nav>
