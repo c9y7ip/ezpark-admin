@@ -7,10 +7,20 @@ const apiClient = axios.create({
     baseURL: URL
 })
 
+apiClient.interceptors.request.use(function (config){
+    let token = localStorage.getItem("JWT");
+    if(token){
+        apiClient.defaults.headers.common['Authorization'] = token;
+    }
+    return config
+}, function (error) {
+    return Promise.reject(error);
+})
+
 const userLogin = (payload, callback) => {
     apiClient.post('/auth/login', payload, callback)
         .then((res) => {
-            apiClient.defaults.headers.common['Authorization'] = res.data
+            localStorage.setItem("JWT", res.data);
             callback(true);
         }).catch(error => {
             console.log(error);
@@ -20,6 +30,7 @@ const userLogin = (payload, callback) => {
 
 const userLogout = () => {
     delete apiClient.defaults.headers.common["Authorization"];
+    localStorage.removeItem("JWT");
 }
 
 export default {
