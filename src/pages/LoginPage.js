@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from "react-router-dom";
+import NavBar from '../components/Navbar'
 import EventService from "./EventService";
 
 class LoginPage extends React.Component {
@@ -7,11 +9,11 @@ class LoginPage extends React.Component {
         this.state = {email: '', password: ''};
     }
 
-    onPasswordChange(e){
+    onPasswordChange(e) {
         this.setState({password: e.target.value});
     }
 
-    onEmailChange(e){
+    onEmailChange(e) {
         this.setState({email: e.target.value});
     }
 
@@ -20,22 +22,29 @@ class LoginPage extends React.Component {
         EventService.auth.userLogin(this.state);
     }
 
-    render(){
+    render() {
         return (
             <section>
+                <NavBar isLogin={false}/>
                 <h2>Login Page</h2>
                 <form onSubmit={this.handleSubmit.bind(this)} method="POST">
                     <section>
                         <label>Email : </label>
-                        <input onChange={this.onEmailChange.bind(this)} type='email' placeholder='example@email.com'/><br />
+                        <input onChange={this.onEmailChange.bind(this)} type='email' placeholder='example@email.com'/>
+                    </section>
+                    <section>
                         <label>Password : </label>
                         <input onChange={this.onPasswordChange.bind(this)} type='password' placeholder='*****'/>
                     </section>
-                    <button type="submit">Login</button>
+                    <Link to="/admin">
+                        <button>
+                            Login
+                        </button>
+                    </Link>
                 </form>
             </section>
         );
-    }
+    };
 }
 
 
