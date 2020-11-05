@@ -6,6 +6,9 @@ class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {email: '', password: '', isAuthenticated: false};
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onEmailChange = this.onEmailChange.bind(this);
+        this.onPasswordChange = this.onPasswordChange.bind(this);
     }
 
     onPasswordChange(e) {
@@ -33,14 +36,14 @@ class LoginPage extends React.Component {
             <section>
                 <NavBar isLogin={this.state.isAuthenticated}/>
                 <h2>Login Page</h2>
-                <form onSubmit={this.handleSubmit.bind(this)} method="POST">
+                <form onSubmit={this.handleSubmit} method="POST">
                     <section>
                         <label>Email : </label>
-                        <input onChange={this.onEmailChange.bind(this)} type='email' placeholder='example@email.com'/>
+                        <input onChange={this.onEmailChange} type='email' placeholder='example@email.com'/>
                     </section>
                     <section>
                         <label>Password : </label>
-                        <input onChange={this.onPasswordChange.bind(this)} type='password' placeholder='*****'/>
+                        <input onChange={this.onPasswordChange} type='password' placeholder='*****'/>
                     </section>
                     <button type='submit'>Login</button>
                 </form>
