@@ -10,7 +10,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(function (config){
     let token = localStorage.getItem("JWT");
     if(token){
-        apiClient.defaults.headers.common['Authorization'] = token;
+        config.headers.authorization = token;
     }
     return config
 }, function (error) {
@@ -29,7 +29,7 @@ const userLogin = (payload, callback) => {
 }
 
 const userLogout = () => {
-    delete apiClient.defaults.headers.common["Authorization"];
+    delete apiClient.config.headers.authorization;
     localStorage.removeItem("JWT");
 }
 
