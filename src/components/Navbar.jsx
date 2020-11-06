@@ -3,11 +3,11 @@ import React from 'react';
 // import './styles/navbar.css'
 
 import {Navbar, Nav} from 'react-bootstrap';
-import { logout } from '../utils';
+import EventService from "../services/EventService"
 
 function handleLogout() {
-    logout();
-    //TODO: set state to logged out
+    EventService.auth.userLogout();
+    this.props.history.push('/login', this.state);
 };
 
 const NavBar = (props) => {
