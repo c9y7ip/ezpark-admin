@@ -25,17 +25,17 @@ const NavBar = (props) => {
             
             <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
             {
-                props.isLogin 
-                ?
+                EventService.auth.isLogin() 
+                ? 
                 <Nav>
                     <Navbar.Text>
                         Signed in as: <b style={{color:"white"}}>Bobby</b>
                     </Navbar.Text>
-                    <Nav.Link href="/" onClick={handleLogout}>logout</Nav.Link>
+                    <Nav.Link href="/login" onClick={handleLogout}>logout</Nav.Link>
                 </Nav>
                 :
                 <Nav>
-                    <Nav.Link href="/">login</Nav.Link>
+                    <Nav.Link href="/login">login</Nav.Link>
                 </Nav>   
             }   
             </Navbar.Collapse> 
