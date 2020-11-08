@@ -1,14 +1,16 @@
 import React from 'react';
 import {Tabs, Tab} from 'react-bootstrap';
 
-import Navbar from './Navbar'
-import ParkingList from '../components/ParkingList'
-import UserList from '../components/UserList'
+import NavBar from './Navbar'
+import ParkingList from './ParkingList'
+import UserList from './UserList'
+import EventService from "../services/EventService";
+
 
 const Home = () => {
     return (
         <section>
-            <Navbar/>
+            <NavBar isLogin={EventService.auth.isLogin()}/>
             <section><h4>Welcome , Admin !</h4></section>
             <Tabs defaultActiveKey="parking-lot" id="uncontrolled-tab-example">
                 <Tab eventKey="parking-lot" title="Parking Lot" >

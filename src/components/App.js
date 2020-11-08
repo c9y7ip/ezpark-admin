@@ -5,7 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Home'
 import PrivateRoute from './PrivateRoute'
 import Login from './Login'
-import EventService from "../services/EventService";
+// import NavBar from './Navbar'
+// import EventService from "../services/EventService";
 
 
 import {

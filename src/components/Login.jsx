@@ -25,6 +25,7 @@ class Login extends React.Component {
             this.setState({isAuthenticated: authSuccess});
             if(authSuccess){
                 this.props.history.push('/', this.state);
+                NavBar.handleLogin();
             } else {
                 window.location.reload(false);
             }
@@ -34,7 +35,7 @@ class Login extends React.Component {
     render() {
         return (
             <section>
-                <NavBar />
+                <NavBar isLogin={EventService.auth.isLogin()}/>
                 <h2>Login Page</h2>
                 <form onSubmit={this.handleSubmit} method="POST">
                     <section>
