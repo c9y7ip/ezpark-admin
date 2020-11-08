@@ -33,6 +33,7 @@ class Login extends React.Component {
             this.setState({ isAuthenticated: authSuccess });
             if (authSuccess) {
                 this.props.history.push('/', this.state);
+                NavBar.handleLogin();
             } else {
                 window.location.reload(false);
             }
@@ -42,15 +43,16 @@ class Login extends React.Component {
     render() {
         return (
             <section>
+                <NavBar isLogin={EventService.auth.isLogin()}/>
                 <h2>Login Page</h2>
                 <form onSubmit={this.handleSubmit} method="POST">
                     <section>
                         <label>Email : </label>
-                        <input id="email" type='email' placeholder='example@email.com' />
+                        <input onChange={this.onEmailChange} type='email' placeholder='example@email.com'/>
                     </section>
                     <section>
                         <label>Password : </label>
-                        <input id="password" type='password' placeholder='*****' />
+                        <input onChange={this.onPasswordChange} type='password' placeholder='*****'/>
                     </section>
                     <button type='submit'>Login</button>
                 </form>
@@ -61,3 +63,4 @@ class Login extends React.Component {
 
 
 export default Login;
+

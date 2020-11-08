@@ -1,6 +1,14 @@
 import React from 'react';
+import {Table} from 'react-bootstrap';
+
+import userData from '../testuser.json';
+import User from './User';
 
 const UserList = () => {
+
+    const allUser = userData.map(user => 
+        <User key={user._id.$oid} data={user}/>)
+
     return (
         <section>
             <section className='userList'>
@@ -8,27 +16,24 @@ const UserList = () => {
             </section>
 
             <section>
-                <table>
-                    <caption>
-                        User
-                    </caption>
+                <Table bordered hover>
                     <thead>
-                        <tr>
-                            <th>User ID</th>
+                        <tr> 
+                            <th>Email</th>
+                            <th>Password</th>
                             <th>Name</th>
+                            <th>Phone</th>
+                            <th>IsAdmin</th>
+                            <th>Stripe Id</th>
+                            <th>Cars</th>
+                            <th>Sessions</th>
+                            <th>Parkings</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>John</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bob</td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <tbody>
+                            {allUser}
+                        </tbody>
+                </Table>
             </section>
         </section>
     );

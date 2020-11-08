@@ -4,9 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from './Home'
 import PrivateRoute from './PrivateRoute'
-import Navbar from './Navbar'
 import Login from './Login'
-import EventService from "../services/EventService";
+// import NavBar from './Navbar'
+// import EventService from "../services/EventService";
 
 
 import {
@@ -21,7 +21,6 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Navbar isLogin={EventService.auth.isLogin()}/>
                 <Router>
                     <Route exact path="/login" component={Login} />
                     <PrivateRoute exact path='/' component={Home} />
