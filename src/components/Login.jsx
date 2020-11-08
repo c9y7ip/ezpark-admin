@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBar from '../components/Navbar'
+import '../styles/Login.css'
 import EventService from "../services/EventService";
 
 class Login extends React.Component {
@@ -44,19 +45,23 @@ class Login extends React.Component {
 
     render() {
         return (
-            <section>
-                <h2>Login Page</h2>
-                <form onSubmit={this.handleSubmit} method="POST">
-                    <section>
-                        <label>Email : </label>
-                        <input onChange={this.onEmailChange} type='email' placeholder='example@email.com' />
+            <section className="auth-wrapper">
+                <section className="auth-inner">
+                    <section className="container">
+                        <form onSubmit={this.handleSubmit} method="POST">
+                            <h3>Login</h3>
+                            <section classnName="form-group">
+                                <label>Email : </label>
+                                <input onChange={this.onEmailChange} className="form-control" type='email' placeholder='example@email.com' />
+                            </section>
+                            <section className="form-group">
+                                <label>Password : </label>
+                                <input onChange={this.onPasswordChange} className="form-control" type='password' placeholder='*****' />
+                            </section>
+                            <button className="btn btn-primary btn-block" type='submit'>Submit</button>
+                        </form>
                     </section>
-                    <section>
-                        <label>Password : </label>
-                        <input onChange={this.onPasswordChange} type='password' placeholder='*****' />
-                    </section>
-                    <button type='submit'>Login</button>
-                </form>
+                </section>
             </section>
         );
     };
