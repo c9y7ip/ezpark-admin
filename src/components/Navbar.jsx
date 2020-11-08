@@ -5,22 +5,15 @@ import {React, Component} from 'react';
 import {Navbar, Nav} from 'react-bootstrap';
 import EventService from "../services/EventService"
 
-// function handleLogout() {
-//     EventService.auth.userLogout();
-//     // this.props.history.push('/login', this.state);
-// };
-
 class NavBar extends Component {
     constructor(props) {
         super(props);
-        // this.state = {isLogin: false};
         this.handleLogout = this.handleLogout.bind(this);
     }
 
     handleLogout() {
         EventService.auth.userLogout();
         this.props.history.push('/login', this.state);
-        // this.setState({isLogin  : false})
     };
 
     render() {
