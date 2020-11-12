@@ -1,5 +1,5 @@
 
-import axios  from 'axios';
+import axios from 'axios';
 
 const TOKEN_KEY = 'JWT';
 const URL = `http://35.202.57.20:${process.env.PORT || 5000}`;
@@ -7,9 +7,9 @@ const apiClient = axios.create({
     baseURL: URL
 })
 
-apiClient.interceptors.request.use(function (config){
+apiClient.interceptors.request.use(function (config) {
     let token = localStorage.getItem(TOKEN_KEY);
-    if(token){
+    if (token) {
         config.headers.authorization = token;
     }
     return config
@@ -20,26 +20,25 @@ apiClient.interceptors.request.use(function (config){
 const userLogin = (payload, callback) => {
     apiClient.post('/auth/login', payload, callback)
         .then((res) => {
-            localStorage.setItem(TOKEN_KEY, res.data);
-            callback(true);
+            localStorage.setItem(TOKEN_KEY, res.data.token);
+            callback(true, res.data.name);
         }).catch(error => {
             console.log(error);
             callback(false);
-    });
+        });
 }
 
 const userLogout = () => {
-    delete apiClient.config.headers.authorization;
     localStorage.removeItem(TOKEN_KEY);
 }
 
 const isLogin = () => {
-    if(localStorage.getItem(TOKEN_KEY)) {
+    if (localStorage.getItem(TOKEN_KEY)) {
         return true;
     }
     return false;
 }
 
 export default {
-    auth:{userLogin, userLogout, isLogin}
+    auth: { userLogin, userLogout, isLogin }
 }
