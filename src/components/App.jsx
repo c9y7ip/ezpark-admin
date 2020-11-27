@@ -6,6 +6,8 @@ import Home from './Home'
 import PrivateRoute from './PrivateRoute'
 import Login from './Login'
 import NavBar from './Navbar'
+import UserDetail from './UserDetail'
+import ParkingDetail from './ParkingLotDetail'
 import EventService from "../services/EventService";
 
 
@@ -28,22 +30,25 @@ class App extends Component {
         this.setState({
             name: name
         })
-
     }
+    
     render() {
         return (
             <div>
                 <NavBar isLogin={EventService.auth.isLogin()} user={this.state.name} />
                 <Router>
-                    <Route
-                        exact path="/login"
-                        render={(props) => (
-                            <Login {...props}
-                                onNameChange={this.onNameChange}
-                            />
-                        )} />
-                    <PrivateRoute path='/' component={Home} />
-                    {/* <PrivateRoute path='/user/:name'/> */}
+                    <switch>
+                        <Route
+                            exact path="/login"
+                            render={(props) => (
+                                <Login {...props}
+                                    onNameChange={this.onNameChange}
+                                />
+                            )}/>
+                        <PrivateRoute exact path='/' component={Home} />
+                        <PrivateRoute exact path='/user/:id' component={UserDetail}/>
+                        {/* <PrivateRoute path='/parking/:num' component={Tutorial}/> */}
+                    </switch>
                 </Router>
             </div>
         )

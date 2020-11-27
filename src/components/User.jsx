@@ -16,12 +16,12 @@ const User = (props) => {
             <td>{props.data.sessions}</td>
             <td>{props.data.parkings}</td> */}
             <td class="detailBut">
-                {/* <Link to={{     
-                    pathname: `/users/${props.data.name}`,
-                    state:props.data
-                    }}> */}
+                <Link to={{     
+                    pathname: `/users/${props.data._id.$oid}`,
+                    state:props.data._id.$oid
+                    }}>
                     <Button variant="info">Detail</Button>
-                {/* </Link> */}
+                </Link>
             </td>
         </tr>
     );
