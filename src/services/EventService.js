@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const TOKEN_KEY = 'JWT';
-const URL = `http://34.67.193.145:${process.env.PORT || 5000}`;
+const URL = `http://localhost:${process.env.PORT || 5000}`;
 const apiClient = axios.create({
     baseURL: URL
 })

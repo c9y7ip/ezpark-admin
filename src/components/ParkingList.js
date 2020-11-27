@@ -1,14 +1,14 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-import {Button, Table} from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import { Button, Table } from 'react-bootstrap';
 
 import lotData from '../testlot.json';
 import ParkingLot from './ParkingLot';
 
 const ParkingList = () => {
 
-    const allParking = lotData.map(lots => 
-        <ParkingLot key={lots._id.$oid} data={lots}/>)
+    const allParking = lotData.map(lots =>
+        <ParkingLot key={lots._id.$oid} data={lots} />)
 
     return (
         <section>
@@ -34,7 +34,7 @@ const ParkingList = () => {
                             <th rowspan="2" colspan="1">Sessions</th>
                             <th rowspan="2" colspan="1">QrCode Url</th>
                         </tr>
-                        <tr> 
+                        <tr>
                             <th>Street</th>
                             <th>City</th>
                             <th>Province</th>
@@ -42,14 +42,14 @@ const ParkingList = () => {
                             <th>Postal Code</th>
                         </tr>
                     </thead>
-                        <tbody>
-                            {allParking}
-                        </tbody>
+                    <tbody>
+                        {allParking}
+                    </tbody>
                 </Table>
             </section>
-        
+
             <section>
-                <Link to='/'>
+                <Link to='/editor'>
                     <Button>
                         create a new Parking Lot
                     </Button>
