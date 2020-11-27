@@ -43,6 +43,7 @@ class App extends Component {
                             />
                         )} />
                     <PrivateRoute path='/' component={Home} />
+                    {/* <PrivateRoute path='/user/:name'/> */}
                 </Router>
             </div>
         )

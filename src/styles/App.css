@@ -2,3 +2,19 @@ body, html {
     width: 100%;
     height: 100%;
   }
+
+.center96 {
+  margin: 0% 2%;
+}
+
+.center94 {
+  margin: 0% 3%;
+}
+
+.center90 {
+  margin: 0% 5%;
+}
+
+.detailBut {
+  width: 70px;
+}
