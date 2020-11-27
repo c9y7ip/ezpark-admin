@@ -3,18 +3,12 @@ import {
     Link
 } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/ParkingEditor.css'
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import EventService from "../services/EventService";
 
 class ParkingEditor extends React.Component {
     constructor(props) {
         super(props);
-
-        const URL = `http://localhost:${process.env.PORT || 5000}`;
-        this.apiClient = axios.create({
-            baseURL: URL
-        })
 
         this.state = {
             lotName: '',
@@ -42,7 +36,7 @@ class ParkingEditor extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.apiClient.post(
+        EventService.apiClient.post(
             '/parking/create-parking',
             {
                 name: this.state.lotName,
@@ -55,9 +49,6 @@ class ParkingEditor extends React.Component {
                     country: this.state.country,
                     postalCode: this.state.postalCode
                 }
-            },
-            {
-                headers: { Authorization: EventService.getToken() }
             })
         this.props.history.push('/')
     }
@@ -127,7 +118,7 @@ class ParkingEditor extends React.Component {
                                             classes={"form-control"}
                                             onChange={(val) => this.selectCountry(val)} />
                                     </div>
-                                    <div className="colmb-3">
+                                    <div className="col mb-3">
                                         <label for="region">Region</label>
                                         <RegionDropdown
                                             id={"region"}
