@@ -9,7 +9,7 @@ import NavBar from './Navbar'
 import UserDetail from './UserDetail'
 import ParkingDetail from './ParkingLotDetail'
 import EventService from "../services/EventService";
-
+import ParkingEditor from "./ParkingEditor"
 
 import {
     BrowserRouter as Router,
@@ -37,18 +37,17 @@ class App extends Component {
             <div>
                 <NavBar isLogin={EventService.auth.isLogin()} user={this.state.name} />
                 <Router>
-                    <switch>
-                        <Route
-                            exact path="/login"
-                            render={(props) => (
-                                <Login {...props}
-                                    onNameChange={this.onNameChange}
-                                />
-                            )}/>
-                        <PrivateRoute exact path='/' component={Home} />
-                        <PrivateRoute exact path='/user/:id' component={UserDetail}/>
-                        {/* <PrivateRoute path='/parking/:num' component={Tutorial}/> */}
-                    </switch>
+                    <Route
+                        exact path="/login"
+                        render={(props) => (
+                            <Login {...props}
+                                onNameChange={this.onNameChange}
+                            />
+                        )} />
+                    <PrivateRoute exact path='/' component={Home} />
+                    <PrivateRoute exact path='/editor' component={ParkingEditor} />
+                    <PrivateRoute exact path='/user/:id' component={UserDetail}/>
+                    {/* <PrivateRoute path='/parking/:num' component={Tutorial}/> */}
                 </Router>
             </div>
         )

@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const TOKEN_KEY = 'JWT';
-// const URL = `http://35.202.57.20:${process.env.PORT || 5000}`;
+
+// const URL = `http://34.67.193.145:${process.env.PORT || 5000}`;
 const URL = `http://localhost:${process.env.PORT || 5000}`;
 const apiClient = axios.create({
     baseURL: URL
@@ -55,5 +56,6 @@ const isLogin = () => {
 
 export default {
     auth: { userLogin, userLogout, isLogin },
+    apiClient,
     // read: { getUserList }
 }

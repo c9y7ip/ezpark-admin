@@ -49,7 +49,7 @@ class Login extends React.Component {
                     <section className="container">
                         <form onSubmit={this.handleSubmit} method="POST">
                             <h3>Login</h3>
-                            <section classnName="form-group">
+                            <section className="form-group">
                                 <label>Email : </label>
                                 <input onChange={this.onEmailChange} className="form-control" type='email' placeholder='example@email.com' />
                             </section>
@@ -57,7 +57,7 @@ class Login extends React.Component {
                                 <label>Password : </label>
                                 <input onChange={this.onPasswordChange} className="form-control" type='password' placeholder='*****' />
                             </section>
-                            <button className="btn btn-primary btn-block" type='submit'>Submit</button>
+                            <button className="btn btn-primary btn-block" type='submit'>Sign in</button>
                         </form>
                     </section>
                 </section>
