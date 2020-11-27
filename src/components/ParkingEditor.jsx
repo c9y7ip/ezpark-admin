@@ -2,14 +2,32 @@ import * as React from 'react';
 import {
     Link
 } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/ParkingEditor.css'
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import EventService from "../services/EventService";
 
 class ParkingEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { country: 'Canada', region: '' };
+
+        const URL = `http://localhost:${process.env.PORT || 5000}`;
+        this.apiClient = axios.create({
+            baseURL: URL
+        })
+
+        this.state = {
+            lotName: '',
+            lotNumber: '',
+            country: 'Canada',
+            region: '',
+            address: '',
+            city: '',
+            postalCode: '',
+            rate: ''
+        };
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleInputChange(event) {
@@ -20,6 +38,28 @@ class ParkingEditor extends React.Component {
         this.setState({
             [name]: value
         });
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        this.apiClient.post(
+            '/parking/create-parking',
+            {
+                name: this.state.lotName,
+                number: this.state.lotNumber,
+                rate: this.state.rate,
+                address: {
+                    street: this.state.address,
+                    city: this.state.city,
+                    province: this.state.province,
+                    country: this.state.country,
+                    postalCode: this.state.postalCode
+                }
+            },
+            {
+                headers: { Authorization: EventService.getToken() }
+            })
+        this.props.history.push('/')
     }
 
     selectCountry(val) {
@@ -40,30 +80,46 @@ class ParkingEditor extends React.Component {
                     <div className="row justify-content-center">
                         <div className="col-md-8 order-md-1">
                             <h4 className="mb-3">Parking Lot Info</h4>
-                            <form className="needs-validation" novalidate>
+                            <form className="needs-validation" onSubmit={this.handleSubmit} novalidate>
                                 <div className="row">
                                     <div className="col-md-6 mb-3">
                                         <label for="lotName">Lot Name</label>
-                                        <input type="text" className="form-control" id="lotName" placeholder="" value={this.state.lotName} required />
+                                        <input type="text" className="form-control" name="lotName" placeholder="" value={this.state.lotName} onChange={this.handleInputChange} required />
                                         <div className="invalid-feedback">
                                             Valid first name is required.
                                         </div>
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <label for="lastName">Lot Number</label>
-                                        <input type="number" className="form-control" id="lastName" placeholder="" value={this.state.lotNumber} required />
+                                        <label for="lotNumber">Lot Number</label>
+                                        <input type="number" className="form-control" name="lotNumber" placeholder="" value={this.state.lotNumber} onChange={this.handleInputChange} required />
                                     </div>
                                 </div>
 
                                 <div className="mb-3">
                                     <label for="address">Street Address</label>
-                                    <input type="text" className="form-control" id="address" placeholder="1234 Main St" value={this.state.address} required />
+                                    <input type="text" className="form-control" name="address" placeholder="1234 Main St" value={this.state.address} onChange={this.handleInputChange} required />
                                     <div className="invalid-feedback">
                                         Please enter your shipping address.
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-md-5 mb-3">
+                                    <div className="col mb-3">
+                                        <label for="city">City</label>
+                                        <input type="text" className="form-control" name="city" placeholder="" value={this.state.city} onChange={this.handleInputChange} required />
+                                        <div className="invalid-feedback">
+                                            Zip code required.
+                                        </div>
+                                    </div>
+                                    <div className="col-md-3 mb-3">
+                                        <label for="postalCode">Postal/Zip</label>
+                                        <input type="text" className="form-control" name="postalCode" placeholder="" value={this.state.postalCode} onChange={this.handleInputChange} required />
+                                        <div className="invalid-feedback">
+                                            Zip code required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col mb-3">
                                         <label for="country">Country</label>
                                         <CountryDropdown
                                             id={"country"}
@@ -71,7 +127,7 @@ class ParkingEditor extends React.Component {
                                             classes={"form-control"}
                                             onChange={(val) => this.selectCountry(val)} />
                                     </div>
-                                    <div className="col-md-4 mb-3">
+                                    <div className="colmb-3">
                                         <label for="region">Region</label>
                                         <RegionDropdown
                                             id={"region"}
@@ -79,13 +135,6 @@ class ParkingEditor extends React.Component {
                                             value={this.state.region}
                                             classes={"form-control"}
                                             onChange={(val) => this.selectRegion(val)} />
-                                    </div>
-                                    <div className="col-md-3 mb-3">
-                                        <label for="zip">Postal/Zip</label>
-                                        <input type="text" className="form-control" id="zip" placeholder="" value={this.state.postalCode} required />
-                                        <div className="invalid-feedback">
-                                            Zip code required.
-                                        </div>
                                     </div>
                                 </div>
 
@@ -98,7 +147,7 @@ class ParkingEditor extends React.Component {
                                         <div className="input-group-prepend">
                                             <div className="input-group-text">$/hr</div>
                                         </div>
-                                        <input type="number" className="form-control" min="0" id="rate" placeholder="Hourly Rate" value={this.state.rate} />
+                                        <input type="number" className="form-control" min="0" name="rate" placeholder="Hourly Rate" value={this.state.rate} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
 
