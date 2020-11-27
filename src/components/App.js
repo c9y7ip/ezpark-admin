@@ -7,7 +7,7 @@ import PrivateRoute from './PrivateRoute'
 import Login from './Login'
 import NavBar from './Navbar'
 import EventService from "../services/EventService";
-
+import ParkingEditor from "./ParkingEditor"
 
 import {
     BrowserRouter as Router,
@@ -42,7 +42,8 @@ class App extends Component {
                                 onNameChange={this.onNameChange}
                             />
                         )} />
-                    <PrivateRoute path='/' component={Home} />
+                    <PrivateRoute exact path='/' component={Home} />
+                    <PrivateRoute exact path='/editor' component={ParkingEditor} />
                 </Router>
             </div>
         )
