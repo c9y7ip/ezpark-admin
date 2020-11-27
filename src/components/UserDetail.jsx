@@ -14,6 +14,9 @@ class UserDetail extends Component {
         return(
             <section>
                 <h3>User Detail</h3>
+
+
+
                 <Link to="/">
                     <Button>Back</Button>
                 </Link>

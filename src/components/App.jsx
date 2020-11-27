@@ -35,8 +35,8 @@ class App extends Component {
     render() {
         return (
             <div>
-                <NavBar isLogin={EventService.auth.isLogin()} user={this.state.name} />
                 <Router>
+                    <NavBar isLogin={EventService.auth.isLogin()} user={this.state.name} />
                     <Route
                         exact path="/login"
                         render={(props) => (
@@ -46,7 +46,7 @@ class App extends Component {
                         )} />
                     <PrivateRoute exact path='/' component={Home} />
                     <PrivateRoute exact path='/editor' component={ParkingEditor} />
-                    <PrivateRoute exact path='/user/:id' component={UserDetail}/>
+                    <PrivateRoute path='/users/:id' component={UserDetail}/>
                     {/* <PrivateRoute path='/parking/:num' component={Tutorial}/> */}
                 </Router>
             </div>

@@ -1,6 +1,5 @@
 import { React, Component } from 'react';
-
-// import './styles/navbar.css'
+import { Link } from "react-router-dom";
 
 import { Navbar, Nav } from 'react-bootstrap';
 import EventService from "../services/EventService"
@@ -22,15 +21,17 @@ class NavBar extends Component {
                 {
                     this.props.isLogin
                         ?
-                        <Navbar.Brand href="/" className="align-center">
-                            <img
-                                alt="logo"
-                                src="/images/logo-small.png"
-                                width="100"
-                                className="d-inline-block"
-                            />{' '}
-                        EZ PARK
-                        </Navbar.Brand>
+                        <Link to="/">
+                            <Navbar.Brand className="align-center">
+                                <img
+                                    alt="logo"
+                                    src="/images/logo-small.png"
+                                    width="100"
+                                    className="d-inline-block"
+                                />{' '}
+                            EZ PARK
+                            </Navbar.Brand>
+                        </Link>
                         :
                         <Navbar.Brand href="/login" className="align-center">
                             <img
