@@ -22,9 +22,9 @@ class UserDetail extends Component {
         );
 
         return (
-            <section class="center96">
+            <section class="center90">
                 <h3>User Detail</h3>
-                <section class="center70">
+                <section class="center80">
                     <Table bordered>
                         <tr>
                             <td class="col-wd-20">Name : </td> <td>test_name</td>
