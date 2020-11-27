@@ -39,7 +39,7 @@ class UserList extends Component {
                 </section>
 
                 <section>
-                    <Table bordered hover>
+                    <Table striped bordered hover>
                         <thead>
                             <tr> 
                                 <th>Email</th>

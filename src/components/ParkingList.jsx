@@ -14,16 +14,11 @@ const ParkingList = () => {
         <section class="center90">
             <section className='parkingList'>
                 <h3>Parking List</h3>
-                <Link to='/'>
-                    <Button className="pull-right" >
-                        Edit Lot
-                    </Button>
-                </Link>
             </section>
 
 
             <section>
-                <Table bordered hover >
+                <Table striped bordered hover>
                     <thead>
                         <tr>
                             <th>Number</th>
