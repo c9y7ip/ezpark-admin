@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 
 
 const ParkingLot = (props) => {
@@ -17,10 +19,15 @@ const ParkingLot = (props) => {
             <td>{props.data.rate}</td>
             {/* <td>{props.data.sessions}</td> */}
             <td>{props.data.qrCodeUrl}</td>
-            <td class="detailBut"><Button variant="info">Detail</Button></td>
+            <td class="detailBut">
+                <Link to={ `/parking/${props.data.number}`}>
+                    <Button variant="info">Detail</Button>
+                </Link>
+            </td>
         </tr>
     );
 
 }
+
 
 export default ParkingLot;
