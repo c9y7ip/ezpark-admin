@@ -25,43 +25,55 @@ class ParkingDetail extends Component {
             <div className="bg-light">
                 <div className="container">
                     <div className="py-5 text-center">
-                        <h2>Parking Lot Detail</h2>
+                        <h2>
+                            Parking Lot Detail
+
+                        </h2>
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-md-8 order-md-1">
-                            {/* <h4 className="mb-3">Parking Lot Info</h4> */}
+                            <section class="toRight ">
+                                {/* <Link to="/"> */}
+                                    <Button>Edit</Button>
+                                {/* </Link> */}
+                            </section>
+                            <div className="btn-toolbar mb-5 right">
+                                <div className="btn-group">
+
+                                </div>
+                            </div>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <label for="lotName">Lot Name</label>
+                                    <label for="lotName"><b>Lot Name</b></label>
                                     <p>{this.state.lotName}</p>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label for="lotNumber">Lot Number</label>
+                                    <label for="lotNumber"><b>Lot Number</b></label>
                                     <p>{this.state.lotNumber}</p>
                                 </div>
                             </div>
 
                             <div className="mb-3">
-                                <label for="address">Street Address</label>
+                                <label for="address"><b>Street Address</b></label>
                                 <p>{this.state.address}</p>
                             </div>
                             <div className="row">
                                 <div className="col mb-3">
-                                    <label for="city">City</label>
+                                    <label for="city"><b>City</b></label>
                                     <p>{this.state.city}</p>
                                 </div>
                                 <div className="col-md-3 mb-3">
-                                    <label for="postalCode">Postal/Zip</label>
+                                    <label for="postalCode"><b>Postal/Zip</b></label>
                                     <p>{this.state.postalCode}</p>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col mb-3">
-                                    <label for="country">Country</label>
+                                    <label for="country"><b>Country</b></label>
                                     <p>{this.state.country}</p>
                                     </div>
                                 <div className="col mb-3">
-                                    <label for="region">Region</label>
+                                    <label for="region"><b>Region</b></label>
                                     <p>{this.state.region}</p>
                                 </div>
                             </div>
@@ -72,9 +84,7 @@ class ParkingDetail extends Component {
 
                             <div className="md-3 mb-3">
                                 <div className="input-group mb-2">
-                                    <div className="input-group-prepend">
-                                        <div className="input-group-text">$/hr</div>
-                                    </div>
+                                    <label for="region"><b>Rate ($/hr) : </b></label>
                                     <p>{this.state.rate}</p>
                                 </div>
                             </div>
@@ -85,12 +95,12 @@ class ParkingDetail extends Component {
                             </div>
                             <hr className="mb-4" />
                             <div className="btn-toolbar mb-5 right">
-                                    <div className="btn-group">
-                                        <Link to="/">
-                                            <Button>Back</Button>
-                                        </Link>
-                                    </div>
+                                <div className="btn-group">
+                                    <Link to="/">
+                                        <Button>Back</Button>
+                                    </Link>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -31,3 +31,7 @@ body, html {
 .left-mar-5{
   margin-left: 5%;
 }
+
+.toRight {
+  text-align: right;
+}
