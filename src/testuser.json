@@ -4,7 +4,7 @@
   },
   "email": "test@email.com",
   "password": "1234",
-  "name": "Js",
+  "name": "test1",
   "phone": "778-123-4567",
   "isAdmin": true,
   "stripeId": "...",
@@ -19,7 +19,7 @@
   "cars": [],
   "sessions": [],
   "parkings": [],
-  "name": "777@mail",
+  "name": "test2",
   "password": "$2b$10$Lah3KOM1JOBgRfPtSMC7JechAhxgA1KHNUlSz7aI2Mxj/mIHMLh5S",
   "email": "777@mail",
   "phone": "1234556"

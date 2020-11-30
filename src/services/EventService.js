@@ -1,10 +1,9 @@
-
 import axios from 'axios';
 
 const TOKEN_KEY = 'JWT';
 
-const URL = `http://34.67.193.145:${process.env.PORT || 5000}`;
-// const URL = `http://localhost:${process.env.PORT || 5000}`;
+// const URL = `http://34.67.193.145:${process.env.PORT || 5000}`;
+const URL = `http://localhost:${process.env.PORT || 5000}`;
 const apiClient = axios.create({
     baseURL: URL
 })
@@ -41,7 +40,22 @@ const isLogin = () => {
     return false;
 }
 
+
+// const getUserList = (callback) => {
+//     apiClient.get('/auth/users')
+//         .then((res) => {
+//         //    return res.data;
+//            console.log("success!");
+//            callback(res.data);
+//         }).catch(error => {
+//             console.log(error);
+//         });
+// }
+
+
+
 export default {
     auth: { userLogin, userLogout, isLogin },
-    apiClient
+    apiClient,
+    // read: { getUserList }
 }

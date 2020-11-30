@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from '../components/Navbar'
 import '../styles/Login.css'
 import EventService from "../services/EventService";
 

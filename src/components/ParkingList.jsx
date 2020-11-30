@@ -11,36 +11,32 @@ const ParkingList = () => {
         <ParkingLot key={lots._id.$oid} data={lots} />)
 
     return (
-        <section>
+        <section class="center90">
             <section className='parkingList'>
                 <h3>Parking List</h3>
-                <Link to='/'>
-                    <Button className="pull-right" >
-                        Edit Lot
-                    </Button>
-                </Link>
             </section>
 
 
             <section>
-                <Table bordered hover >
+                <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th rowspan="2" colspan="1">Number</th>
-                            <th rowspan="2" colspan="1">Name</th>
-                            <th rowspan="2" colspan="1">Created By</th>
-                            <th rowspan="1" colspan="5">Address</th>
-                            <th rowspan="2" colspan="1">Rate</th>
-                            <th rowspan="2" colspan="1">Sessions</th>
-                            <th rowspan="2" colspan="1">QrCode Url</th>
+                            <th>Number</th>
+                            <th>Name</th>
+                            {/* <th rowspan="2" colspan="1">Created By</th> */}
+                            {/* <th rowspan="1" colspan="5">Address</th> */}
+                            <th>Rate</th>
+                            {/* <th rowspan="2" colspan="1">Sessions</th> */}
+                            <th>QrCode Url</th>
+                            <th></th>
                         </tr>
-                        <tr>
+                        {/* <tr> 
                             <th>Street</th>
                             <th>City</th>
                             <th>Province</th>
                             <th>Country</th>
                             <th>Postal Code</th>
-                        </tr>
+                        </tr> */}
                     </thead>
                     <tbody>
                         {allParking}

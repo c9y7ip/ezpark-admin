@@ -6,6 +6,8 @@ import Home from './Home'
 import PrivateRoute from './PrivateRoute'
 import Login from './Login'
 import NavBar from './Navbar'
+import UserDetail from './UserDetail'
+import ParkingDetail from './ParkingDetail'
 import EventService from "../services/EventService";
 import ParkingEditor from "./ParkingEditor"
 
@@ -28,13 +30,13 @@ class App extends Component {
         this.setState({
             name: name
         })
-
     }
+    
     render() {
         return (
             <div>
-                <NavBar isLogin={EventService.auth.isLogin()} user={this.state.name} />
                 <Router>
+                    <NavBar isLogin={EventService.auth.isLogin()} user={this.state.name} />
                     <Route
                         exact path="/login"
                         render={(props) => (
@@ -44,6 +46,8 @@ class App extends Component {
                         )} />
                     <PrivateRoute exact path='/' component={Home} />
                     <PrivateRoute exact path='/editor' component={ParkingEditor} />
+                    <PrivateRoute path='/users/:id' component={UserDetail}/>
+                    <PrivateRoute path='/parking/:num' component={ParkingDetail}/>
                 </Router>
             </div>
         )
