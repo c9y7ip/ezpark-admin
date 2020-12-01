@@ -20,10 +20,10 @@ class ParkingList extends Component {
 
     getLists() {        
         EventService.apiClient.get(
-            '/parking/all')
+            '/parking/allLots')
             .then((res) => {
-                this.setState({ allParkingList: [res.data] });
-                console.log(this.state.allParkingList)
+                this.setState({ allParkingList: res.data });
+                // console.log(this.state.allParkingList)
             })
             .catch(e => {
                 console.log(e);
@@ -31,11 +31,10 @@ class ParkingList extends Component {
     }
 
     render() {
-        // const allParkingArray = Array.from(this.state.allParkingList);
+        const allParkingArray = Array.from(this.state.allParkingList);
         // console.log(allParkingArray)
-        // const allParking = allParkingArray.map(lots =>
-        //     <ParkingLot key={Object.keys(lots)} data={lots} />
-        //     );
+        const allParking = allParkingArray.map(lots =>
+            <ParkingLot key={lots._id} data={lots} />)
         return (
             <section className="center90">
                 <section className='parkingList'>
@@ -49,13 +48,12 @@ class ParkingList extends Component {
                             <tr>
                                 <th>Number</th>
                                 <th>Name</th>
-                                <th>Rate</th>
-                                <th>QrCode Url</th>
+                                <th>Rate ($/hr)</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {/* {allParking} */}
+                            {allParking}
                         </tbody>
                     </Table>
                 </section>

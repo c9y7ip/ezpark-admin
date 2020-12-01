@@ -1,21 +1,39 @@
 import { React, Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import EventService from "../services/EventService";
 
 
 class ParkingDetail extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            lotName: 'Tname',
-            lotNumber: 'Tlot no',
-            country: 'Canada',
-            region: 're',
-            address: 'add',
-            city: 'ci',
-            postalCode: 'poc ode',
-            rate: '23'
-        };
+        this.state = { number : props.match.params.num };
+        this.getLot = this.getLot.bind(this)
+    }
+
+    componentDidMount = () => {
+        this.getLot();
+    }
+
+    getLot() {
+        const number = this.state.number;
+        // console.log(number)
+        EventService.getOneLot(
+            {number}, (res)=> {
+                const detail = res[0]
+                console.log(detail)
+                this.setState({
+                    lotName: detail.name,
+                    lotNumber: detail.number,
+                    country: detail.address.country,
+                    region: detail.address.region,
+                    address: detail.address.street,
+                    city: detail.address.city,
+                    postalCode: detail.address.postalCode,
+                    rate: detail.rate
+                })
+            }
+        )
     }
 
     render() {
@@ -30,7 +48,7 @@ class ParkingDetail extends Component {
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-md-8 order-md-1">
-                            <section class="toRight ">
+                            <section className="toRight ">
                                 {/* <Link to="/"> */}
                                     <Button>Edit</Button>
                                 {/* </Link> */}
@@ -42,37 +60,37 @@ class ParkingDetail extends Component {
                             </div>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <label for="lotName"><b>Lot Name</b></label>
+                                    <h5><b>Lot Name</b></h5>
                                     <p>{this.state.lotName}</p>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label for="lotNumber"><b>Lot Number</b></label>
+                                    <h5><b>Lot Number</b></h5>
                                     <p>{this.state.lotNumber}</p>
                                 </div>
                             </div>
 
                             <div className="mb-3">
-                                <label for="address"><b>Street Address</b></label>
-                                <p>{this.state.address}</p>
+                                <h5><b>Street Address</b></h5>
+                                <p>{this.state.address ? this.state.address : '-'}</p>
                             </div>
                             <div className="row">
                                 <div className="col mb-3">
-                                    <label for="city"><b>City</b></label>
-                                    <p>{this.state.city}</p>
+                                    <h5><b>City</b></h5>
+                                    <p>{this.state.city ? this.state.city : '-'}</p>
                                 </div>
                                 <div className="col-md-3 mb-3">
-                                    <label for="postalCode"><b>Postal/Zip</b></label>
-                                    <p>{this.state.postalCode}</p>
+                                    <h5><b>Postal/Zip</b></h5>
+                                    <p>{this.state.postalCode ? this.state.postalCode : '-'}</p>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col mb-3">
-                                    <label for="country"><b>Country</b></label>
-                                    <p>{this.state.country}</p>
+                                    <h5><b>Country</b></h5>
+                                    <p>{this.state.country ? this.state.country : '-'}</p>
                                     </div>
                                 <div className="col mb-3">
-                                    <label for="region"><b>Region</b></label>
-                                    <p>{this.state.region}</p>
+                                    <h5><b>Region</b></h5>
+                                    <p>{this.state.region ? this.state.region : '-'}</p>
                                 </div>
                             </div>
 
@@ -82,7 +100,7 @@ class ParkingDetail extends Component {
 
                             <div className="md-3 mb-3">
                                 <div className="input-group mb-2">
-                                    <label for="region"><b>Rate ($/hr) : </b></label>
+                                    <h5><b>Rate ($/hr) : </b></h5>
                                     <p>{this.state.rate}</p>
                                 </div>
                             </div>

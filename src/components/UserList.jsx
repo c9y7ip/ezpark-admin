@@ -23,7 +23,7 @@ class UserList extends Component {
             '/auth/users')
             .then((res) => {
                 this.setState({ allUserList: res.data });
-                console.log(this.state.allUserList)
+                // console.log(this.state.allUserList)
             })
             .catch(e => {
                 console.log(e);

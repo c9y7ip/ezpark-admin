@@ -51,8 +51,19 @@ const getOneUser = (payload, callback) => {
         });
 }
 
+const getOneLot = (payload, callback) => {
+    apiClient.post(
+        '/parking/getOneLot', payload, callback)
+        .then((res) => {
+            callback(res.data)
+        })
+        .catch(e => {
+            console.log(e);
+        });
+}
+
 
 export default {
     auth: { userLogin, userLogout, isLogin },
-    apiClient, getOneUser
+    apiClient, getOneUser, getOneLot
 }
