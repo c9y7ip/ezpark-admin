@@ -1,10 +1,7 @@
 import { React, Component } from 'react';
 import {Table} from 'react-bootstrap';
-
-import userData from '../testuser.json';
 import User from './User';
 import EventService from "../services/EventService";
-
 
 
 class UserList extends Component {

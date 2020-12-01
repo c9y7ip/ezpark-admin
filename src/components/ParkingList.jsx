@@ -2,7 +2,6 @@ import { React, Component } from 'react';
 import { Link } from "react-router-dom";
 import { Button, Table } from 'react-bootstrap';
 import EventService from "../services/EventService";
-
 import ParkingLot from './ParkingLot';
 
 
