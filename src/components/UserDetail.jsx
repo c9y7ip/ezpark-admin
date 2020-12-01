@@ -1,17 +1,41 @@
 import { React, Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import EventService from "../services/EventService";
 
 
 class UserDetail extends Component {
     constructor(props) {
-        super(props)
-        this.state = {}
+        super(props);
+        this.state = { email : props.match.params.email };
+        this.getUser = this.getUser.bind(this);
     }
 
-    render() {
+    componentDidMount = () => {
+        this.getUser();
+    }
 
+    getUser() {
+        const email = this.state.email;
+        EventService.getOneUser(
+            {email}, (res)=> {
+                const detail = res[0]
+                this.setState({
+                    name: detail.name,
+                    email: detail.email,
+                    isAdmin: detail.isAdmin,
+                    password: detail.password,
+                    phone: detail.phone,
+                    parkingId : detail.parkings[0],
+                    carId: detail.cars[0],
+                    stripeId: detail.stripeId
+                })
+            }
+        )
+    }
+    
+
+    render() {
         const DrawLine = ({ color, height }) => (
             <hr style={{
                 color: color,
@@ -22,52 +46,64 @@ class UserDetail extends Component {
         );
 
         return (
-            <section class="center90">
+            <section className="center90">
                 <h3>User Detail</h3>
-                <section class="center80">
+                <section className="center80">
                     <Table bordered>
-                        <tr>
-                            <td class="col-wd-20">Name : </td> <td>test_name</td>
-                        </tr>
-                        <tr>
-                            <td class="col-wd-20">E-Mail : </td> <td>test_mail</td>
-                        </tr>
-                        <tr>
-                            <td class="col-wd-20">Password : </td> <td>test_pw</td>
-                        </tr>
-                        <tr>
-                            <td class="col-wd-20">Phone No. : </td> <td>test_phone</td>
-                        </tr>
-                        <tr>
-                            <td class="col-wd-20">Admin : </td> <td>No</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td className="col-wd-20">Name : </td>
+                                <td>{this.state.name}</td>
+                            </tr>
+                            <tr>
+                                <td className="col-wd-20">E-Mail : </td>
+                                <td>{this.state.email}</td>
+                            </tr>
+                            <tr>
+                                <td className="col-wd-20">Phone No. : </td>
+                                <td>{this.state.phone}</td>
+                            </tr>
+                            <tr>
+                                <td className="col-wd-20">Admin : </td>
+                                <td>{this.state.isAdmin ? 'Yes' : 'No'}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+
+                    <DrawLine className="black" />
+                    <h5 className="left-mar-5">Payment method </h5>
+                    <Table bordered>
+                        <tbody>
+                            <tr>
+                                <td className="col-wd-20">Stripe Id :</td>
+                                <td>{this.state.sId ? this.state.sId : 'None'}</td>
+                            </tr>
+                        </tbody>
                     </Table>
 
                     <DrawLine color="black" />
-                    <h5 class="left-mar-5">Payment method </h5>
+                    <h5 className="left-mar-5">Car Info </h5>
                     <Table bordered>
-                        <tr>
-                            <td class="col-wd-20">Stripe Id : </td> <td>test_sid</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td className="col-wd-20">Car ID : </td>
+                                <td>{this.state.carId ? this.state.carId : 'None'}</td>
+                            </tr>
+                        </tbody>
                     </Table>
 
                     <DrawLine color="black" />
-                    <h5 class="left-mar-5">Car Info </h5>
+                    <h5 className="left-mar-5">Parking </h5>
                     <Table bordered>
-                        <tr>
-                            <td class="col-wd-20">Car : </td> <td>test_car</td>
-                        </tr>
-                    </Table>
-
-                    <DrawLine color="black" />
-                    <h5 class="left-mar-5">Parking </h5>
-                    <Table bordered>
-                        <tr>
-                            <td class="col-wd-20">Parking : </td> <td>None</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                              <td className="col-wd-20">Parking ID : </td>
+                              <td>{this.state.parkingId ? this.state.parkingId : 'None' }</td>
+                            </tr>
+                        </tbody>
                     </Table>
                 </section>
-                <section class="text-center">
+                <section className="text-center">
                     <Link to="/">
                         <Button>Back</Button>
                     </Link>

@@ -7,16 +7,10 @@ const User = (props) => {
     return (
         <tr>
             <td>{props.data.email}</td>
-            {/* <td>{props.data.password}</td> */}
             <td>{props.data.name}</td>
             <td>{props.data.phone}</td>
-            {/* <td>{props.data.isAdmin ? 'yes': 'no'}</td> */}
-            {/* <td>{props.data.stripeId}</td>
-            <td>{props.data.cars}</td>
-            <td>{props.data.sessions}</td>
-            <td>{props.data.parkings}</td> */}
-            <td class="detailBut">
-                <Link to={ `/users/${props.data._id.$oid}`}>
+            <td className="detailBut">
+                <Link to={ `/users/${props.data.email}`}>
                     <Button variant="info">Detail</Button>
                 </Link>
             </td>

@@ -40,22 +40,19 @@ const isLogin = () => {
     return false;
 }
 
-
-// const getUserList = (callback) => {
-//     apiClient.get('/auth/users')
-//         .then((res) => {
-//         //    return res.data;
-//            console.log("success!");
-//            callback(res.data);
-//         }).catch(error => {
-//             console.log(error);
-//         });
-// }
-
+const getOneUser = (payload, callback) => {
+    apiClient.post(
+        '/auth/getOneUser', payload, callback)
+        .then((res) => {
+            callback(res.data)
+        })
+        .catch(e => {
+            console.log(e);
+        });
+}
 
 
 export default {
     auth: { userLogin, userLogout, isLogin },
-    apiClient,
-    // read: { getUserList }
+    apiClient, getOneUser
 }

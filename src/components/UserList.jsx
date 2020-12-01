@@ -11,29 +11,33 @@ class UserList extends Component {
     constructor(props) {
         super(props);
         this.state = { allUserList: '' };
-        // this.getLists = this.getLists.bind(this);
+        this.getLists = this.getLists.bind(this);
     }
 
-    // componentDidMount = () => {
-    //     this.getLists();
-    // }
+    componentDidMount = () => {
+        this.getLists();
+    }
 
-    // getLists() {
-    //     EventService.read.getUserList(res => {
-    //         this.setState({
-    //             allUserList: res
-    //         });
-    //         console.log(res);
-    //     });
-    // }
+    getLists() {        
+        EventService.apiClient.get(
+            '/auth/users')
+            .then((res) => {
+                this.setState({ allUserList: res.data });
+                console.log(this.state.allUserList)
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
     
 
 
     render() {
-        const allUser = userData.map(user => 
-            <User key={user._id.$oid} data={user}/>)
+        const allUserArray = Array.from(this.state.allUserList);
+        const allUser = allUserArray.map(user => 
+            <User key={user._id} data={user}/>)
         return (
-            <section class="center90">
+            <section className="center90">
                 <section className='userList'>
                     <h3>User List</h3>
                 </section>
@@ -43,14 +47,8 @@ class UserList extends Component {
                         <thead>
                             <tr> 
                                 <th>Email</th>
-                                {/* <th>Password</th> */}
                                 <th>Name</th>
                                 <th>Phone</th>
-                                {/* <th>IsAdmin</th> */}
-                                {/* <th>Stripe Id</th>
-                                <th>Cars</th>
-                                <th>Sessions</th>
-                                <th>Parkings</th> */}
                                 <th></th>
                             </tr>
                         </thead>

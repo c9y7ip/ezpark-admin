@@ -1,5 +1,5 @@
 import { React, Component } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -16,8 +16,6 @@ class ParkingDetail extends Component {
             postalCode: 'poc ode',
             rate: '23'
         };
-        // this.handleInputChange = this.handleInputChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     render() {
