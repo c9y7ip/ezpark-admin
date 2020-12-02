@@ -46,7 +46,7 @@ class App extends Component {
                         )} />
                     <PrivateRoute exact path='/' component={Home} />
                     <PrivateRoute exact path='/editor' component={ParkingEditor} />
-                    <PrivateRoute path='/users/:id' component={UserDetail}/>
+                    <PrivateRoute path='/users/:email' component={UserDetail}/>
                     <PrivateRoute path='/parking/:num' component={ParkingDetail}/>
                 </Router>
             </div>

@@ -1,58 +1,73 @@
-import React from 'react';
+import { React, Component } from 'react';
 import { Link } from "react-router-dom";
 import { Button, Table } from 'react-bootstrap';
-
-import lotData from '../testlot.json';
+import EventService from "../services/EventService";
 import ParkingLot from './ParkingLot';
 
-const ParkingList = () => {
 
-    const allParking = lotData.map(lots =>
-        <ParkingLot key={lots._id.$oid} data={lots} />)
+class ParkingList extends Component {
 
-    return (
-        <section class="center90">
-            <section className='parkingList'>
-                <h3>Parking List</h3>
+    constructor(props) {
+        super(props);
+        this.state = { allParkingList: '' };
+        this.getLists = this.getLists.bind(this);
+    }
+
+    componentDidMount = () => {
+        this.getLists();
+    }
+
+    getLists() {        
+        EventService.apiClient.post(
+            '/parking/allLots')
+            .then((res) => {
+                this.setState({ allParkingList: res.data });
+                // console.log(this.state.allParkingList)
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    render() {
+        const allParkingArray = Array.from(this.state.allParkingList);
+        // console.log(allParkingArray)
+        const allParking = allParkingArray.map(lots =>
+            <ParkingLot key={lots._id} data={lots} />)
+        return (
+            <section className="center90">
+                <section className='parkingList'>
+                    <h3>Parking List</h3>
+                </section>
+    
+    
+                <section>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Name</th>
+                                <th>Rate ($/hr)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {allParking}
+                        </tbody>
+                    </Table>
+                </section>
+    
+                <section>
+                    <Link to='/editor'>
+                        <Button>
+                            create a new Parking Lot
+                        </Button>
+                    </Link>
+                </section>
             </section>
-
-
-            <section>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Number</th>
-                            <th>Name</th>
-                            {/* <th rowspan="2" colspan="1">Created By</th> */}
-                            {/* <th rowspan="1" colspan="5">Address</th> */}
-                            <th>Rate</th>
-                            {/* <th rowspan="2" colspan="1">Sessions</th> */}
-                            <th>QrCode Url</th>
-                            <th></th>
-                        </tr>
-                        {/* <tr> 
-                            <th>Street</th>
-                            <th>City</th>
-                            <th>Province</th>
-                            <th>Country</th>
-                            <th>Postal Code</th>
-                        </tr> */}
-                    </thead>
-                    <tbody>
-                        {allParking}
-                    </tbody>
-                </Table>
-            </section>
-
-            <section>
-                <Link to='/editor'>
-                    <Button>
-                        create a new Parking Lot
-                    </Button>
-                </Link>
-            </section>
-        </section>
-    );
+        );
+    }
+    
 };
 
 export default ParkingList;
