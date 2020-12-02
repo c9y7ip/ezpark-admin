@@ -18,7 +18,7 @@ class ParkingList extends Component {
     }
 
     getLists() {        
-        EventService.apiClient.get(
+        EventService.apiClient.post(
             '/parking/allLots')
             .then((res) => {
                 this.setState({ allParkingList: res.data });
