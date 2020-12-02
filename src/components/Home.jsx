@@ -3,6 +3,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 
 import ParkingList from './ParkingList'
 import UserList from './UserList'
+import ValidateLicense from './ValidateLicense'
 
 
 const Home = () => {
@@ -10,11 +11,14 @@ const Home = () => {
         <section className="center98">
             <section><h4>Welcome , Admin !</h4></section>
             <section className="center96">
-                <Tabs defaultActiveKey="parking-lot" id="uncontrolled-tab-example">
-                    <Tab eventKey="parking-lot" title="Parking Lot" >
+                <Tabs>
+                    <Tab eventKey="validate-license" title="Validate License">
+                        <ValidateLicense />
+                    </Tab>
+                    <Tab eventKey="parking-lot" title="Parking Lots" >
                         <ParkingList />
                     </Tab>
-                    <Tab eventKey="user" title="Profile">
+                    <Tab eventKey="user" title="Profiles">
                         <UserList />
                     </Tab>
                 </Tabs>
