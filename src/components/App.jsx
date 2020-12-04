@@ -50,6 +50,16 @@ class App extends Component {
         }))
     }
 
+    addLot = (id, parkingLot) => {
+        this.setState(prevState => ({
+            ...prevState,
+            allParkingMap: {
+                ...prevState.allParkingMap,
+                [id]: parkingLot
+            }
+        }))
+    }
+
     componentDidMount = () => {
         this.getLists();
     }
@@ -85,7 +95,7 @@ class App extends Component {
                             />
                         )} />
                     <PrivateRoute exact path='/' component={Home} allParkingMap={this.state.allParkingMap} deleteLot={this.deleteLot} />
-                    <PrivateRoute exact path='/editor' component={ParkingEditor} updateLot={this.updateLot} />
+                    <PrivateRoute exact path='/editor' component={ParkingEditor} updateLot={this.updateLot} addLot={this.addLot} />
                     <PrivateRoute path='/users/:email' component={UserDetail} />
                     <PrivateRoute path='/parking/:id' component={ParkingDetail} allParkingMap={this.state.allParkingMap} />
                 </Router>

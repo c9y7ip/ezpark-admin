@@ -82,7 +82,11 @@ class ParkingEditor extends React.Component {
                         country: this.state.country,
                         postalCode: this.state.postalCode
                     }
-                })
+                }).then(
+                    res => {
+                        this.props.addLot(res.data._id, res.data)
+                    }
+                )
         }
 
         this.props.history.goBack()

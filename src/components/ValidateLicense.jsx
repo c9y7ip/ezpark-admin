@@ -73,7 +73,11 @@ class ValidateLicense extends React.Component {
             // a session was returned
             if (!isExpired) {
                 checkedSession = <div>
-                    <div className="row"><span className="text-success">License {validatedLicense} has valid parking</span></div>
+                    <div className="row">
+                        <div className="col">
+                            <p className="text-success">License {validatedLicense} has valid parking</p>
+                        </div>
+                    </div>
                     {this.renderSession(session, isExpired)}
                 </div>
             } else {

@@ -31,7 +31,7 @@ class Home extends React.Component {
     render() {
         return (
             <section className="center98">
-                <section><h4 className="my-3 mx-3">Welcome , Admin !</h4></section>
+                <section><h4 className="my-3 mx-3">Welcome, Admin !</h4></section>
                 <section className="center96">
                     <Tabs defaultActiveKey="parking-lot">
                         <Tab eventKey="validate-license" title="Validate License">

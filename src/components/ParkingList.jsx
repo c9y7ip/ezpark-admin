@@ -3,7 +3,7 @@ import '../styles/ParkingList.css'
 import { Link } from "react-router-dom";
 import { Button, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDownload } from '@fortawesome/free-solid-svg-icons'
+import { faDownload, faPlus } from '@fortawesome/free-solid-svg-icons'
 import EventService from "../services/EventService";
 import ReactToPrint from 'react-to-print';
 
@@ -40,7 +40,7 @@ class ParkingList extends Component {
         const allParkingArray = Object.values(this.state.allParkingMap);
         console.log(allParkingArray)
         return (
-            <section className="mx-5 my-3">
+            <section className="my-3 mx-3">
                 <section className='parkingList'>
                     <h3>Parking List</h3>
                 </section>
@@ -92,8 +92,8 @@ class ParkingList extends Component {
 
                 <section>
                     <Link to='/editor'>
-                        <Button>
-                            create a new Parking Lot
+                        <Button className="btn btn-lg btn-circle">
+                            <FontAwesomeIcon icon={faPlus} />
                         </Button>
                     </Link>
                 </section>
