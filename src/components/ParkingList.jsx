@@ -1,9 +1,11 @@
 import { React, Component } from 'react';
+import '../styles/ParkingList.css'
 import { Link } from "react-router-dom";
 import { Button, Table } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import EventService from "../services/EventService";
-import ParkingLot from './ParkingLot';
-
+import ReactToPrint from 'react-to-print';
 
 class ParkingList extends Component {
 
@@ -25,6 +27,14 @@ class ParkingList extends Component {
         }
     }
 
+    handleDelete = (id) => {
+        // delete parking lot from ui state
+        this.props.deleteLot(id)
+        // delete parking lot on backend
+        EventService.apiClient.delete(
+            `/parking/${id}`)
+    }
+
     render() {
         // get array of parkinglot objects for parking lot map
         const allParkingArray = Object.values(this.state.allParkingMap);
@@ -42,6 +52,8 @@ class ParkingList extends Component {
                                 <th>Number</th>
                                 <th>Name</th>
                                 <th>Rate ($/hr)</th>
+                                <th>Qr Code</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -51,9 +63,26 @@ class ParkingList extends Component {
                                 <td>{lot.name}</td>
                                 <td>{lot.rate}</td>
                                 <td className="detailBut">
+                                    <ReactToPrint
+                                        trigger={() => {
+                                            // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+                                            // to the root node of the returned component as it will be overwritten.
+                                            return <Button type="button" className="btn"><FontAwesomeIcon icon={faDownload} /></Button>
+                                        }}
+                                        content={() => this.componentRef}
+                                    />
+                                    {/* hide qr image with boostrap class none */}
+                                    <div className="d-none">
+                                        <img src={lot.qrCodeUrl} alt="not loaded" height="100%" width="100%" ref={el => (this.componentRef = el)} />
+                                    </div>
+                                </td>
+                                <td className="detailBut">
                                     <Link to={`/parking/${lot._id}`}>
                                         <Button variant="info">Detail</Button>
                                     </Link>
+                                </td>
+                                <td className="detailBut">
+                                    <Button type="button" className="btn btn-danger" onClick={() => { this.handleDelete(lot._id) }}>Delete</Button>
                                 </td>
                             </tr>)
                             }

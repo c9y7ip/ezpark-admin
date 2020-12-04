@@ -31,14 +31,14 @@ class Home extends React.Component {
     render() {
         return (
             <section className="center98">
-                <section><h4>Welcome , Admin !</h4></section>
+                <section><h4 className="my-3 mx-3">Welcome , Admin !</h4></section>
                 <section className="center96">
-                    <Tabs>
+                    <Tabs defaultActiveKey="parking-lot">
                         <Tab eventKey="validate-license" title="Validate License">
                             <ValidateLicense />
                         </Tab>
                         <Tab eventKey="parking-lot" title="Parking Lots" >
-                            <ParkingList allParkingMap={this.props.allParkingMap} />
+                            <ParkingList allParkingMap={this.props.allParkingMap} deleteLot={this.props.deleteLot} />
                         </Tab>
                         <Tab eventKey="user" title="Profiles">
                             <UserList />

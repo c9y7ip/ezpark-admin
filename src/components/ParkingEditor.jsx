@@ -11,14 +11,16 @@ class ParkingEditor extends React.Component {
         super(props);
 
         this.state = {
-            lotName: '',
-            lotNumber: '',
-            country: 'Canada',
-            region: '',
-            address: '',
-            city: '',
-            postalCode: '',
-            rate: ''
+            id: props.location.state ? props.location.state.parkingLot._id : '',
+            lotName: props.location.state ? props.location.state.parkingLot.name : '',
+            lotNumber: props.location.state ? props.location.state.parkingLot.number : '',
+            country: props.location.state ? props.location.state.parkingLot.address.country : 'Canada',
+            region: props.location.state ? props.location.state.parkingLot.address.province : '',
+            address: props.location.state ? props.location.state.parkingLot.address.street : '',
+            city: props.location.state ? props.location.state.parkingLot.address.city : '',
+            postalCode: props.location.state ? props.location.state.parkingLot.address.postalCode : '',
+            rate: props.location.state ? props.location.state.parkingLot.rate : '',
+            isEdit: props.location.state ? props.location.state.isEdit : false
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,21 +38,54 @@ class ParkingEditor extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        EventService.apiClient.post(
-            '/parking/create-parking',
-            {
-                name: this.state.lotName,
-                number: this.state.lotNumber,
-                rate: this.state.rate,
-                address: {
-                    street: this.state.address,
-                    city: this.state.city,
-                    province: this.state.region,
-                    country: this.state.country,
-                    postalCode: this.state.postalCode
-                }
-            })
-        this.props.history.push('/')
+        if (this.state.isEdit) {
+            const address = {
+                street: this.state.address,
+                city: this.state.city,
+                province: this.state.region,
+                country: this.state.country,
+                postalCode: this.state.postalCode
+            }
+            // update top level state storing parking lot info
+            this.props.updateLot(
+                this.state.id,
+                this.state.lotName,
+                this.state.lotNumber,
+                this.state.rate,
+                address)
+            // update back end parking lot info
+            EventService.apiClient.put(
+                `/parking/${this.state.id}`,
+                {
+                    name: this.state.lotName,
+                    number: this.state.lotNumber,
+                    rate: this.state.rate,
+                    address: {
+                        street: this.state.address,
+                        city: this.state.city,
+                        province: this.state.region,
+                        country: this.state.country,
+                        postalCode: this.state.postalCode
+                    }
+                })
+        } else {
+            EventService.apiClient.post(
+                '/parking/create-parking',
+                {
+                    name: this.state.lotName,
+                    number: this.state.lotNumber,
+                    rate: this.state.rate,
+                    address: {
+                        street: this.state.address,
+                        city: this.state.city,
+                        province: this.state.region,
+                        country: this.state.country,
+                        postalCode: this.state.postalCode
+                    }
+                })
+        }
+
+        this.props.history.goBack()
     }
 
     selectCountry(val) {
@@ -66,7 +101,7 @@ class ParkingEditor extends React.Component {
             <div className="bg-light">
                 <div className="container">
                     <div className="py-5 text-center">
-                        <h2>Create New Parking Lot</h2>
+                        <h2>{this.state.isEdit ? 'Edit' : 'Create New'} Parking Lot</h2>
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-md-8 order-md-1">
@@ -96,14 +131,14 @@ class ParkingEditor extends React.Component {
                                 <div className="row">
                                     <div className="col mb-3">
                                         <label for="city">City</label>
-                                        <input type="text" className="form-control" name="city" placeholder="" value={this.state.city} onChange={this.handleInputChange} required />
+                                        <input type="text" className="form-control" name="city" value={this.state.city} onChange={this.handleInputChange} required />
                                         <div className="invalid-feedback">
                                             Zip code required.
                                         </div>
                                     </div>
                                     <div className="col-md-3 mb-3">
                                         <label for="postalCode">Postal/Zip</label>
-                                        <input type="text" className="form-control" name="postalCode" placeholder="" value={this.state.postalCode} onChange={this.handleInputChange} required />
+                                        <input type="text" className="form-control" name="postalCode" value={this.state.postalCode} onChange={this.handleInputChange} required />
                                         <div className="invalid-feedback">
                                             Zip code required.
                                         </div>
@@ -152,9 +187,7 @@ class ParkingEditor extends React.Component {
                                         <button className="btn btn-primary btn-md" type="submit">Save</button>
                                     </div>
                                     <div className="btn-group">
-                                        <Link to="/">
-                                            <button id="cancel" name="cancel" class="btn btn-outline-danger btn-md">Cancel</button>
-                                        </Link>
+                                        <button id="cancel" name="cancel" class="btn btn-outline-danger btn-md" onClick={this.props.history.goBack}>Cancel</button>
                                     </div>
                                 </div>
                             </form>

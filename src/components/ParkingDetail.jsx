@@ -29,7 +29,7 @@ class ParkingDetail extends Component {
     }
 
     render() {
-        if (this.state.parkingLot.name) {
+        if (this.state.parkingLot && this.state.parkingLot.name) {
             return (
                 <div className="bg-light">
                     <div className="container">
@@ -41,24 +41,19 @@ class ParkingDetail extends Component {
                         </div>
                         <div className="row justify-content-center">
                             <div className="col-md-8 order-md-1">
-                                <section className="toRight ">
-                                    {/* <Link to="/"> */}
-                                    <Button>Edit</Button>
-                                    {/* </Link> */}
-                                </section>
-                                <div className="btn-toolbar mb-5 right">
-                                    <div className="btn-group">
-
-                                    </div>
-                                </div>
                                 <div className="row">
-                                    <div className="col-md-6 mb-3">
+                                    <div className="col mb-3">
                                         <h5><b>Lot Name</b></h5>
                                         <p>{this.state.parkingLot.name}</p>
                                     </div>
-                                    <div className="col-md-6 mb-3">
+                                    <div className="col mb-3">
                                         <h5><b>Lot Number</b></h5>
                                         <p>{this.state.parkingLot.number}</p>
+                                    </div>
+                                    <div className="col">
+                                        <Link to={{ pathname: '/editor', state: { isEdit: true, parkingLot: this.state.parkingLot } }}>
+                                            <Button className="float-right">Edit</Button>
+                                        </Link>
                                     </div>
                                 </div>
 
@@ -71,7 +66,7 @@ class ParkingDetail extends Component {
                                         <h5><b>City</b></h5>
                                         <p>{this.state.parkingLot.address ? this.state.parkingLot.address.city : '-'}</p>
                                     </div>
-                                    <div className="col-md-3 mb-3">
+                                    <div className="col mb-3 text-right">
                                         <h5><b>Postal/Zip</b></h5>
                                         <p>{this.state.parkingLot.address ? this.state.parkingLot.address.postalCode : '-'}</p>
                                     </div>
@@ -81,7 +76,7 @@ class ParkingDetail extends Component {
                                         <h5><b>Country</b></h5>
                                         <p>{this.state.parkingLot.address ? this.state.parkingLot.address.country : '-'}</p>
                                     </div>
-                                    <div className="col mb-3">
+                                    <div className="col mb-3 text-right">
                                         <h5><b>Province/Region</b></h5>
                                         <p>{this.state.parkingLot.address ? this.state.parkingLot.address.province : '-'}</p>
                                     </div>

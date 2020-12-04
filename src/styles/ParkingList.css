@@ -1,0 +1,10 @@
+@media print {
+    @page {
+        size: portrait;
+        text-align: center;
+      }
+    img {
+        max-width: 600px;
+        max-height: 600px;
+  }
+}

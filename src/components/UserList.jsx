@@ -1,5 +1,5 @@
 import { React, Component } from 'react';
-import {Table} from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import User from './User';
 import EventService from "../services/EventService";
 
@@ -15,7 +15,7 @@ class UserList extends Component {
         this.getLists();
     }
 
-    getLists() {        
+    getLists() {
         EventService.apiClient.get(
             '/auth/users')
             .then((res) => {
@@ -26,15 +26,15 @@ class UserList extends Component {
                 console.log(e);
             });
     }
-    
+
 
 
     render() {
         const allUserArray = Array.from(this.state.allUserList);
-        const allUser = allUserArray.map(user => 
-            <User key={user._id} data={user}/>)
+        const allUser = allUserArray.map(user =>
+            <User key={user._id} data={user} />)
         return (
-            <section className="center90">
+            <section className="mx-5 my-3">
                 <section className='userList'>
                     <h3>User List</h3>
                 </section>
@@ -42,16 +42,16 @@ class UserList extends Component {
                 <section>
                     <Table striped bordered hover>
                         <thead>
-                            <tr> 
+                            <tr>
                                 <th>Email</th>
                                 <th>Name</th>
                                 <th>Phone</th>
                                 <th></th>
                             </tr>
                         </thead>
-                            <tbody>
-                                {allUser}
-                            </tbody>
+                        <tbody>
+                            {allUser}
+                        </tbody>
                     </Table>
                 </section>
             </section>

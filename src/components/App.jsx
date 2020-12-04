@@ -26,6 +26,30 @@ class App extends Component {
         this.onNameChange = this.onNameChange.bind(this);
     }
 
+    deleteLot = (id) => {
+        const allParkingMap = Object.assign({}, this.state.allParkingMap)
+        delete allParkingMap[id]
+        this.setState(
+            { allParkingMap })
+    }
+
+    updateLot = (id, name, number, rate, address) => {
+        this.setState(prevState => ({
+            ...prevState,
+            allParkingMap: {
+                ...prevState.allParkingMap,
+                [id]: {
+                    ...prevState.allParkingMap[id],
+                    name,
+                    number,
+                    rate,
+                    address
+                }
+            }
+
+        }))
+    }
+
     componentDidMount = () => {
         this.getLists();
     }
@@ -60,8 +84,8 @@ class App extends Component {
                                 onNameChange={this.onNameChange}
                             />
                         )} />
-                    <PrivateRoute exact path='/' component={Home} allParkingMap={this.state.allParkingMap} />
-                    <PrivateRoute exact path='/editor' component={ParkingEditor} />
+                    <PrivateRoute exact path='/' component={Home} allParkingMap={this.state.allParkingMap} deleteLot={this.deleteLot} />
+                    <PrivateRoute exact path='/editor' component={ParkingEditor} updateLot={this.updateLot} />
                     <PrivateRoute path='/users/:email' component={UserDetail} />
                     <PrivateRoute path='/parking/:id' component={ParkingDetail} allParkingMap={this.state.allParkingMap} />
                 </Router>
