@@ -9,38 +9,32 @@ class ParkingList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { allParkingList: '' };
-        this.getLists = this.getLists.bind(this);
+        this.state = { allParkingMap: {} };
     }
 
     componentDidMount = () => {
-        this.getLists();
+        this.setState({ allParkingMap: this.props.allParkingMap });
     }
 
-    getLists() {        
-        EventService.apiClient.post(
-            '/parking/allLots')
-            .then((res) => {
-                this.setState({ allParkingList: res.data });
-                // console.log(this.state.allParkingList)
-            })
-            .catch(e => {
-                console.log(e);
+    componentWillReceiveProps(nextProps) {
+        if (this.props !== nextProps) {
+            this.setState({
+                allParkingMap: nextProps.allParkingMap
             });
+            console.log(nextProps.allParkingMap)
+        }
     }
 
     render() {
-        const allParkingArray = Array.from(this.state.allParkingList);
-        // console.log(allParkingArray)
-        const allParking = allParkingArray.map(lots =>
-            <ParkingLot key={lots._id} data={lots} />)
+        // get array of parkinglot objects for parking lot map
+        const allParkingArray = Object.values(this.state.allParkingMap);
+        console.log(allParkingArray)
         return (
-            <section className="center90">
+            <section className="mx-5 my-3">
                 <section className='parkingList'>
                     <h3>Parking List</h3>
                 </section>
-    
-    
+
                 <section>
                     <Table striped bordered hover>
                         <thead>
@@ -52,11 +46,21 @@ class ParkingList extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {allParking}
+                            {allParkingArray.map(lot => <tr>
+                                <td>{lot.number}</td>
+                                <td>{lot.name}</td>
+                                <td>{lot.rate}</td>
+                                <td className="detailBut">
+                                    <Link to={`/parking/${lot._id}`}>
+                                        <Button variant="info">Detail</Button>
+                                    </Link>
+                                </td>
+                            </tr>)
+                            }
                         </tbody>
                     </Table>
                 </section>
-    
+
                 <section>
                     <Link to='/editor'>
                         <Button>
@@ -67,7 +71,7 @@ class ParkingList extends Component {
             </section>
         );
     }
-    
+
 };
 
 export default ParkingList;

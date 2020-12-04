@@ -22,8 +22,12 @@ import {
 class App extends Component {
     constructor(props) {
         super(props)
-        this.state = { name: '' }
+        this.state = { name: '', allParkingMap: {} }
         this.onNameChange = this.onNameChange.bind(this);
+    }
+
+    componentDidMount = () => {
+        this.getLists();
     }
 
     onNameChange(name) {
@@ -31,7 +35,19 @@ class App extends Component {
             name: name
         })
     }
-    
+
+    getLists() {
+        EventService.apiClient.get(
+            '/parking/all')
+            .then((res) => {
+                this.setState({ allParkingMap: res.data });
+                console.log(this.state.allParkingMap)
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
     render() {
         return (
             <div>
@@ -44,10 +60,10 @@ class App extends Component {
                                 onNameChange={this.onNameChange}
                             />
                         )} />
-                    <PrivateRoute exact path='/' component={Home} />
+                    <PrivateRoute exact path='/' component={Home} allParkingMap={this.state.allParkingMap} />
                     <PrivateRoute exact path='/editor' component={ParkingEditor} />
-                    <PrivateRoute path='/users/:email' component={UserDetail}/>
-                    <PrivateRoute path='/parking/:num' component={ParkingDetail}/>
+                    <PrivateRoute path='/users/:email' component={UserDetail} />
+                    <PrivateRoute path='/parking/:id' component={ParkingDetail} allParkingMap={this.state.allParkingMap} />
                 </Router>
             </div>
         )

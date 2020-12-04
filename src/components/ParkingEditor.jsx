@@ -45,7 +45,7 @@ class ParkingEditor extends React.Component {
                 address: {
                     street: this.state.address,
                     city: this.state.city,
-                    province: this.state.province,
+                    province: this.state.region,
                     country: this.state.country,
                     postalCode: this.state.postalCode
                 }
