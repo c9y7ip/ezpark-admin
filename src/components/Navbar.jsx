@@ -38,9 +38,9 @@ class NavBar extends Component {
                                 alt="logo"
                                 src="/images/logo-small.png"
                                 width="100"
-                                className="d-inline-block"
+                                className="d-inline-block mr-1"
                             />{' '}
-                        EZ PARK
+                            <span className="ml-2">EZ PARK</span>
                         </Navbar.Brand>
                 }
 
@@ -51,7 +51,7 @@ class NavBar extends Component {
                             ?
                             <Nav>
                                 <Navbar.Text>
-                                    Signed in as: <b style={{ color: "white" }}>{this.props.user}</b>
+                                    Signed in as: <b style={{ color: "white" }}>Admin</b>
                                 </Navbar.Text>
                                 <Nav.Link href="/login" onClick={this.handleLogout}>logout</Nav.Link>
                             </Nav>

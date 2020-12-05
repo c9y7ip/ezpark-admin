@@ -32,6 +32,7 @@ class Login extends React.Component {
         }, (authSuccess, name) => {
             this.setState({ isAuthenticated: authSuccess });
 
+            this.props.getLots()
             // set the name in parent state
             this.props.onNameChange(name);
             if (authSuccess) {

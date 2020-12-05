@@ -8,7 +8,8 @@ class ValidateLicense extends React.Component {
             license: '',
             validatedLicense: '',
             isExpired: false,
-            session: null
+            session: null,
+            suggestions: []
         }
 
         this.validateLicense = this.validateLicense.bind(this)
@@ -18,6 +19,7 @@ class ValidateLicense extends React.Component {
 
     validateLicense() {
         console.log(this.state.license)
+        console.log()
         EventService.apiClient.get('/session/sessionbylicense/' + this.state.license)
             .then(response => {
                 console.log(response)
@@ -73,13 +75,17 @@ class ValidateLicense extends React.Component {
             // a session was returned
             if (!isExpired) {
                 checkedSession = <div>
-                    <div className="row"><span className="text-success">License {validatedLicense} has valid parking</span></div>
+                    <div className="row mb-2">
+                        <div className="col">
+                            <p className="text-success">License {validatedLicense} has valid parking</p>
+                        </div>
+                    </div>
                     {this.renderSession(session, isExpired)}
                 </div>
             } else {
                 // no session found for license, its defintely not valid
                 checkedSession =
-                    [<div className="row">
+                    [<div className="row mb-2">
                         <div className="col">
                             <p className="text-danger">License {validatedLicense} does not have valid parking</p>
                         </div>
@@ -97,7 +103,7 @@ class ValidateLicense extends React.Component {
         return (
             <div>
                 <div className="form-row mt-3 mb-3">
-                    <div className="col">
+                    <div className="col d-inline-block p-0 m-0">
                         <input className="form-control" name="license" type="text" onChange={this.handleInputChange} placeholder="Lookup license plate..." aria-label="Search" />
                     </div>
                     <div className="col">
