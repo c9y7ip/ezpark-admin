@@ -73,7 +73,7 @@ class ValidateLicense extends React.Component {
             // a session was returned
             if (!isExpired) {
                 checkedSession = <div>
-                    <div className="row">
+                    <div className="row mb-2">
                         <div className="col">
                             <p className="text-success">License {validatedLicense} has valid parking</p>
                         </div>
@@ -83,7 +83,7 @@ class ValidateLicense extends React.Component {
             } else {
                 // no session found for license, its defintely not valid
                 checkedSession =
-                    [<div className="row">
+                    [<div className="row mb-2">
                         <div className="col">
                             <p className="text-danger">License {validatedLicense} does not have valid parking</p>
                         </div>

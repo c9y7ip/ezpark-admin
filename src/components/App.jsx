@@ -24,6 +24,7 @@ class App extends Component {
         super(props)
         this.state = { name: '', allParkingMap: {} }
         this.onNameChange = this.onNameChange.bind(this);
+        this.getLots = this.getLots.bind(this)
     }
 
     deleteLot = (id) => {
@@ -61,7 +62,7 @@ class App extends Component {
     }
 
     componentDidMount = () => {
-        this.getLists();
+        this.getLots();
     }
 
     onNameChange(name) {
@@ -70,7 +71,7 @@ class App extends Component {
         })
     }
 
-    getLists() {
+    getLots() {
         EventService.apiClient.get(
             '/parking/all')
             .then((res) => {
@@ -92,6 +93,7 @@ class App extends Component {
                         render={(props) => (
                             <Login {...props}
                                 onNameChange={this.onNameChange}
+                                getLots={this.getLots}
                             />
                         )} />
                     <PrivateRoute exact path='/' component={Home} allParkingMap={this.state.allParkingMap} deleteLot={this.deleteLot} />

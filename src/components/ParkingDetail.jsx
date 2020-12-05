@@ -1,5 +1,5 @@
 import { React, Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, ButtonToolbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class ParkingDetail extends Component {
@@ -93,8 +93,8 @@ class ParkingDetail extends Component {
                                     </div>
                                 </div>
 
-                                <div className="row">
-
+                                <div className="row text-center">
+                                    <img src={this.state.parkingLot.qrCodeUrl} alt="loading" />
 
                                 </div>
                                 <hr className="mb-4" />
