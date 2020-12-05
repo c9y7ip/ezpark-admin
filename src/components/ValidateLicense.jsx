@@ -1,4 +1,5 @@
 import * as React from 'react';
+import SuggestionInputSearch from 'suggestion-react-input-search';
 import EventService from "../services/EventService";
 
 class ValidateLicense extends React.Component {
@@ -8,12 +9,14 @@ class ValidateLicense extends React.Component {
             license: '',
             validatedLicense: '',
             isExpired: false,
-            session: null
+            session: null,
+            suggestions: []
         }
 
         this.validateLicense = this.validateLicense.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this);
         this.renderSession = this.renderSession.bind(this)
+        this.handleOnSubmit = this.handleOnSubmit.bind(this)
     }
 
     validateLicense() {
@@ -28,6 +31,13 @@ class ValidateLicense extends React.Component {
                 })
             })
     }
+
+    handleOnSubmit(term) {
+        this.setState({
+            license: term
+        });
+    }
+
 
     handleInputChange(event) {
         const target = event.target;
@@ -101,8 +111,16 @@ class ValidateLicense extends React.Component {
         return (
             <div>
                 <div className="form-row mt-3 mb-3">
-                    <div className="col">
-                        <input className="form-control" name="license" type="text" onChange={this.handleInputChange} placeholder="Lookup license plate..." aria-label="Search" />
+                    <div className="col d-inline-block p-0 m-0">
+                        <SuggestionInputSearch
+                            onSubmitFunction={this.handleOnSubmit}
+                            recentSearches={this.props.recentSearches}
+                            placeholder="Lookup license plate..."
+                            inputClass="form-control w-100"
+                            inputPosition="start"
+                            maxSuggestions={10}
+                        />
+                        {/* <input className="form-control" name="license" type="text" onChange={this.handleInputChange} placeholder="Lookup license plate..." aria-label="Search" /> */}
                     </div>
                     <div className="col">
                         <button className="btn btn-primary" onClick={this.validateLicense}>Validate</button>
